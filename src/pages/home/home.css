@@ -1,0 +1,16 @@
+.home {
+    flex: 4;
+}
+
+.homeWidgets{
+    display: flex;
+    margin: 20px;
+}
+
+.logout{
+    background: #00008b;
+    color: #fff;
+    margin: 30px;
+    cursor: pointer;
+    border-radius: 8px;
+}

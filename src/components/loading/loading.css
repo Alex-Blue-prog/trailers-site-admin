@@ -1,0 +1,38 @@
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  @keyframes loadingDots {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+
+  .loading {
+    background-image: linear-gradient(to right, rgb(8, 8, 241), darkblue);
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    margin-top: 12px;
+    margin-left: 6px;
+    animation: loadingDots;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    
+  }
+
+  .dot2 {
+
+    animation-delay: 250ms;
+  }
+
+  .dot3 {
+    animation-delay: 500ms;
+  }
+
+  .progressBar {
+    margin-top: 10px;
+    height: 20px;
+    background-image: linear-gradient(to right,rgb(8, 8, 241), darkblue);
+    transition: 4s all linear;
+  }
