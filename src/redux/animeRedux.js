@@ -50,6 +50,8 @@ export const animeSlice = createSlice({
                         return true;
                     }
 
+                    return false;
+
                 });
 
                 return anime

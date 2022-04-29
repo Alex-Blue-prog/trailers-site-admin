@@ -34,8 +34,10 @@ const WidgetLg = () => {
     const [animes, setAnimes] = useState([]);
 
     useEffect(() => {
-      const getNewMostViewAnimes = async () => {
+      let check = true;
 
+      const getNewMostViewAnimes = async () => {
+        
         let TOKEN = null;
 
         if(localStorage.getItem("persist:root")){
@@ -52,11 +54,14 @@ const WidgetLg = () => {
         const res = await axios.get(BASE_URL + "info/newmostviews", config);
 
   
-
-        setAnimes(res.data);
+        if(check) {
+          setAnimes(res.data);
+        }
+        
       }
 
       getNewMostViewAnimes();
+      return () => {check = false}
     },[currentUser])
 
 

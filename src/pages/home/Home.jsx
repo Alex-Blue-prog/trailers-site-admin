@@ -1,32 +1,28 @@
-import Chart from "../../components/chart/Chart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
-// import {userData} from "../../dummyData";
-import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
-import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux"
 
 const Home = () => {
   // const [userStats, setUserStats] = useState([]);
 
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Fev",
-      "Mar",
-      "Abr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Ago",
-      "Set",
-      "Out",
-      "Nov",
-      "Dez"
-    ],
-    []
-  );
+  // const MONTHS = useMemo(
+  //   () => [
+  //     "Jan",
+  //     "Fev",
+  //     "Mar",
+  //     "Abr",
+  //     "Mai",
+  //     "Jun",
+  //     "Jul",
+  //     "Ago",
+  //     "Set",
+  //     "Out",
+  //     "Nov",
+  //     "Dez"
+  //   ],
+  //   []
+  // );
 
   // useEffect(()=> {
   //   const getStats = async ()=> {
@@ -56,10 +52,8 @@ const Home = () => {
 
         {currentUser && 
         <>
-          {/* <Chart data={userStats} title="Análise de Usuários" grid dataKey="Usuários ativos"/> */}
           <FeaturedInfo />
           <div className="homeWidgets">
-            {/* <WidgetSm /> */}
             <WidgetLg />  
           </div>
         </>

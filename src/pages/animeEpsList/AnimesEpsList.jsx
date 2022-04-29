@@ -2,37 +2,15 @@ import "./animesEpsList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { deleteAnimeEpisode } from "../../redux/apiCall";
-import { publicRequest } from "../../requestMethods";
 
 export default function AnimesEpsList() {
  
-  // const animes = useSelector(state => state.anime.animes);
-//   const [animesEps, setAnimesEps] = useState([]);
+
   const locationId = useLocation().pathname.split("/")[3]; 
 
-//   useEffect(()=> {
-//     console.log("running");
-//     const getAllAnime = async () => {
-//       const res = await publicRequest("/anime/" + locationId);
-
-//       setAnimesEps(res.data.episodes);
-//     } 
-
-//     getAllAnime();
-//   },[])
-
-
-
   const dispatch = useDispatch();
-
-  
-
-//   useEffect(()=> {
-//     getAnimes(dispatch);
-//   },[dispatch])
 
   const animesEps = useSelector(state => state.anime.animes.find(anime => {
         if(anime._id === locationId){
@@ -57,7 +35,7 @@ export default function AnimesEpsList() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
+            {/* <img className="productListImg" src={params.row.img} alt="" /> */}
             {animesEps?.name}
           </div>
         );

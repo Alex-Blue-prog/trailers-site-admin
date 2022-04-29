@@ -12,22 +12,8 @@ import Loading from "../../components/loading/Loading";
 export default function AnimesList() {
  
   const animes = useSelector(state => state.anime.animes);
-  // const [animes, setAnimes] = useState([]);
-
-  // useEffect(()=> {
-  //   console.log("running");
-  //   const getAllAnime = async () => {
-  //     const res = await publicRequest("/anime/all/");
-
-  //     setAnimes(res.data);
-  //   } 
-
-  //   getAllAnime();
-  // },[])
 
   const dispatch = useDispatch();
-
-  
 
   useEffect(()=> {
     getAnimes(dispatch);
@@ -53,15 +39,6 @@ export default function AnimesList() {
         );
       },
     },
-    // { field: "inStock", 
-    //   headerName: "Estoque", 
-    //   width: 130 
-    // },
-    // {
-    //   field: "price",
-    //   headerName: "Preço",
-    //   width: 160,
-    // },
     {
       field: "action",
       headerName: "Ações",

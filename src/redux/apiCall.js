@@ -36,13 +36,14 @@ export const getAnimes = async (dispatch) => {
 }
 
 
-//DELETE AA ANIME
+//DELETE AN ANIME
 export const deleteAnime = async (id, dispatch) => {
     dispatch(getAnimeStart());
     try{
-    
-        const res = await userRequest.delete("/anime/"+ id);
-        dispatch(deleteAnimeSuccess(id));
+
+        dispatch(deleteAnimeSuccess(id)); //deleting from ui
+        await userRequest.delete("/anime/"+ id); // deleting from the server
+        
     }catch(err) {
         dispatch(getAnimeFailure());
         console.log("could not delete anime main info");
@@ -56,7 +57,7 @@ export const updateAnime = async (id, newAnime, dispatch, newEp) => {
     try{
         if(!newEp){
             //update anime main info
-            const res = await userRequest.put("/anime/"+ id, newAnime);
+            await userRequest.put("/anime/"+ id, newAnime);
             dispatch(updateAnimeSuccess({newAnime, id}));
             return;
         }
@@ -112,8 +113,8 @@ export const addAnime = async (newAnime, dispatch) => {
 export const deleteAnimeEpisode = async (epId, dispatch) => {
     dispatch(getAnimeStart());
     try{
-        await userRequest.delete("/anime/ep/" + epId);
-        dispatch(deleteEpSuccess(epId));
+        dispatch(deleteEpSuccess(epId)); // deleting from ui
+        await userRequest.delete("/anime/ep/" + epId); // deleting from server
     }catch(err){
         dispatch(getAnimeFailure());
         console.log("COULD NOT DELETE ANIME EPISODE");

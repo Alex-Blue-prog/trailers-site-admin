@@ -14,15 +14,15 @@ const FeaturedInfo = () => {
  
 
   useEffect(()=> {
+    let check = true;
     let TOKEN = null;
 
-    if(localStorage.getItem("persist:root")){
+    if(localStorage.getItem("persist:root") && check){
           const user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser;
           if(user) {
               TOKEN = user.accessToken;
           }
     } 
-
     let config = {
         headers: { token: `Bearer ${TOKEN}` },
     }
@@ -31,13 +31,18 @@ const FeaturedInfo = () => {
 
       const res = await userRequest.get(BASE_URL + "info/animetotal", config);
 
-      setAnimeTotal(res.data);
+      if(check) {
+        setAnimeTotal(res.data);
+      }
+      
     }
 
     const getBestAnime = async () => {
       const res = await userRequest.get(BASE_URL + "info/mostpopular", config);
 
-      setBestAnime(res.data.name);
+      if(check) {
+        setBestAnime(res.data.name);
+      }
     } 
 
     const getMostView = async () => {
@@ -45,9 +50,11 @@ const FeaturedInfo = () => {
 
       // console.log(res.data);
 
-      setAnimeView(res.data);
+      if(check) {
+        setAnimeView(res.data);
+      }
 
-      if(res.data[1]) {
+      if(res.data[1] && check) {
         setAnimeViewPerc(res.data[1].total * 100 / res.data[0].total - 100);
       }
     } 
@@ -55,6 +62,8 @@ const FeaturedInfo = () => {
     getAnimeTotal();
     getBestAnime();
     getMostView();
+
+    return () => {check = false}
   },[])
 
 
