@@ -1,15 +1,13 @@
 import { Link, useLocation} from "react-router-dom";
 import "./anime.css";
-import Chart from "../../components/chart/Chart"
-// import {productData} from "../../dummyData"
 import { Publish } from "@material-ui/icons";
 import { useEffect, useState, useMemo } from "react";
-import { userRequest } from "../../requestMethods";
 import { updateAnime } from "../../redux/apiCall";
 import { useDispatch, useSelector } from "react-redux";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../firebase";
 import Loading from "../../components/loading/Loading";
+import { getAnimeStart } from "../../redux/animeRedux";
 
 export default function Anime() {
     const locationTakeId = useLocation().pathname.split("/")[2];
@@ -46,6 +44,7 @@ export default function Anime() {
         return;
     }
 
+    dispatch(getAnimeStart());// calling before firebase request
     
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
@@ -180,7 +179,7 @@ export default function Anime() {
                     <input type="number" name="launch" placeholder={anime.launch} onChange={updateAnimeValue} />
 
                     <label>Número da Temporada </label>
-                    <input type="number" name="temp" placeholder={anime.temp} onChange={updateAnimeValue} />
+                    <input type="number" name="temp" placeholder={anime.temp || "nenhum"} onChange={updateAnimeValue} />
                      
                     <label>Dublado: {anime.dub ? "sim" : "nao"}</label>
                     <select name="dub" onChange={updateAnimeValue}>

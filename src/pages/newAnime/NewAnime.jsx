@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../firebase";
 import Loading from "../../components/loading/Loading";
+import { getAnimeStart } from "../../redux/animeRedux";
 
 
 export default function NewAnime() {
@@ -41,9 +42,10 @@ export default function NewAnime() {
         addAnime(anime, dispatch);
 
         return;
-    }
+    } 
 
-    
+    dispatch(getAnimeStart());// calling before firebase request
+
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
     const storageRef = ref(storage, fileName);
