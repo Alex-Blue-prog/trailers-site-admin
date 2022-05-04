@@ -1,10 +1,10 @@
 import React from 'react';
 import "./topbar.css";
-import { NotificationsNone, Language, Settings } from '@material-ui/icons';
+import { NotificationsNone, Language, Settings, Menu } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/userRedux';
 
-const Topbar = () => {
+const Topbar = ({setOpenSideBar}) => {
 
   const dispatch = useDispatch();
 
@@ -12,11 +12,16 @@ const Topbar = () => {
     dispatch(logout());
   }
 
+ 
+
   return (
     <div className='topbar'>
         <div className='topbarWrapper'>
             <div className="topLeft">
                 <span className='logo'>Painel de admin</span>  
+                <div className='mobileMenuIcon' onClick={setOpenSideBar}>
+                    <Menu />
+                </div>
             </div>  
             <div className="topRight">
            

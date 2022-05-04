@@ -53,3 +53,10 @@
     font-size: 15px;
     color: gray;
 }
+
+@media (max-width: 500px) {
+    .featured {
+        flex-direction: column;
+        /* width: 100vw; */
+    }
+}

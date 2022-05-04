@@ -1,6 +1,7 @@
 .product {
   flex: 4;
-  padding: 20px;
+  padding: 20px 0 !important;
+
 }
 
 .productTitleContainer {
@@ -71,15 +72,19 @@
 
 .productBottom {
   padding: 20px;
-  margin: 20px;
+  margin: 0px !important;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
 .productForm {
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  max-width: 500px;
 }
+
 
 .productFormLeft {
   display: flex;
@@ -129,4 +134,5 @@
   color:white;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
 }

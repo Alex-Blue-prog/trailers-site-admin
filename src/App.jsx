@@ -1,5 +1,5 @@
 import "./app.css";
-import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate, useLocation} from "react-router-dom";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/home/Home";
@@ -14,9 +14,12 @@ import Anime from "./pages/anime/Anime";
 import AddAnimeEps from "./pages/addAnimeEps/AddAnimeEps";
 import AnimesEpsList from "./pages/animeEpsList/AnimesEpsList";
 import NewEp from "./pages/newEp/NewEp";
+import SidebarMobile from "./components/sidebarMobile/SidebarMobile";
+import { useEffect, useState } from "react";
 
 
 function App() {
+  const [openSideBar, setOpenSideBar] = useState(false);
 
   let {currentUser} = useSelector(state => state.user);
 
@@ -30,10 +33,12 @@ function App() {
 
   return (
     <Router>
-      {currentUser &&  <Topbar />}
+      {currentUser &&  <Topbar setOpenSideBar={() => setOpenSideBar(!openSideBar)} />}
      
       <div className="container">
         {currentUser && <Sidebar />}
+        {currentUser && <SidebarMobile openSideBar={openSideBar} setOpenSideBar={() => setOpenSideBar(false)} />}
+      
         
 
         <Routes>
@@ -56,57 +61,4 @@ function App() {
 }
 
 export default App;
-
-
-
-// function App() {
-
-//   const [admin, setAdmin] = useState(false);
-
-
-//   useEffect(()=> {
-//     if(localStorage.getItem("persist:root")){
-
-//       if(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser) {
-//         setAdmin(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin);
-//       }
-//     }
-//   },[]);
-  
-
-//   console.log(admin);
-
-  
-
-//   return (
-//     <Router>
-//       {admin &&  <Topbar />}
-     
-//       <div className="container">
-//         {admin && <Sidebar />}
-        
-
-//         <Routes>
-//           <Route path="/login" element={!admin ? <Login /> : <Navigate to="/" />} />
-//           { admin &&
-//           <>
-//             <Route path="/" element={<Home />}/>
-//             <Route path="/users" element={<UserList />} />
-//             <Route path="/user/:userId" element={<User />} />
-//             <Route path="/newUser" element={<NewUser /> } />
-//             <Route path="/products" element={<ProductList /> } />
-//             <Route path="/product/:productId" element={<Product /> } />
-//             <Route path="/newproduct" element={<NewProduct /> } />
-//           </>
-//           }
-          
-//         </Routes>
-        
-//       </div>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
 

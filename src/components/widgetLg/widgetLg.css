@@ -71,3 +71,9 @@
     color: #2a7ade;
 
 }
+
+@media (max-width: 500px) {
+    .widgetLg {
+        display: none;
+    }
+}

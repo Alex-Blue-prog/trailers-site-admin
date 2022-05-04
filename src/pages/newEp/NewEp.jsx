@@ -71,6 +71,10 @@ export default function AddAnimeEps() {
         <div className="productBottom">
             <form className="productForm">
 
+                <div className="videoContainer">
+                  <video width={"100%"} src={updateNewAnime?.video} controls></video>
+                </div>
+
                 <div className="productFormLeft">
 
                     <label>Número do Trailer</label>
@@ -79,13 +83,11 @@ export default function AddAnimeEps() {
                     <label>Upload Novo Video</label>
                     <input type="file" name="file" onChange={(e) => setVideoUpload(e.target.files[0])} />
 
-                    <button style={{marginTop: "5px"}} disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Atualizar Trailer</button>
+                    <button style={{marginTop: "5px"}} disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Atualizar Video</button>
                     <Loading />        
                 </div>
 
-                <div className="videoContainer">
-                  <video width={"100%"} src={updateNewAnime?.video} controls></video>
-                </div>
+                
             </form>
 
       </div>

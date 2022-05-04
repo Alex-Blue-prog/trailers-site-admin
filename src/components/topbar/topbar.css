@@ -1,3 +1,5 @@
+
+
 .topbar {
     width: 100%;
     height: 50px;
@@ -55,3 +57,21 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
+.mobileMenuIcon {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    .logo {
+        font-size: 1rem;
+        display: none;
+    }
+
+    .mobileMenuIcon {
+        display: block;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+}
+

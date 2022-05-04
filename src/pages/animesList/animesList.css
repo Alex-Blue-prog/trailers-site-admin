@@ -1,5 +1,6 @@
 .productList{
     flex: 4;
+    min-height: calc(100vh - 100px);
 }
 
 .productListItem{

@@ -89,65 +89,10 @@ export default function Anime() {
     );
 
   }
-
-    const MONTHS = useMemo(
-        () => [
-        "Jan",
-        "Fev",
-        "Mar",
-        "Abr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Set",
-        "Out",
-        "Nov",
-        "Dez"
-        ],
-        []
-    );
-
-    // useEffect(()=> {
-    //     const getStats = async () => {
-    //         try{
-    //             const res = await userRequest.get("orders/income?pid=" + locationTakeId);
-
-    //             const list = res.data.sort((a,b)=> {
-    //                 return a._id - b._id;
-    //             })
-
-    //             list.map(item => {
-    //                 setPstats((prev)=> [
-    //                     ...prev,
-    //                     { name: MONTHS[item._id - 1], Vendas: item.total },
-    //                 ])
-    //             })
-    //         } catch(err){
-    //             console.log("income error: ", err);
-    //         }
-    //     }
-    //     getStats();
-    // }, [])
  
   return (
     <div className="product">
-         {/* <div className="productTitleContainer">
-
-            <div>
-              <h1 className="productTitle">Anime</h1>
-            </div>
-            
-            <div>
-            <Link to="/newanime">
-              <button className="productAddButton">Novo</button>
-            </Link>
-            </div>
-        </div> */}
-        <div className="productTop">
-            {/* <div className="productTopLeft">
-                <Chart data={pStats} dataKey="Vendas" title="Desempenho de Vendas"/>
-            </div> */}
+       
             <div className="productTopRight">
                 <div className="productInfoTop">
                     <img src={anime.img} alt="" className="productInfoImg" />
@@ -160,7 +105,7 @@ export default function Anime() {
                     </div>
                 </div>
             </div>
-        </div>
+     
         <div className="productBottom">
             <form className="productForm">
                 <div className="productFormLeft">
@@ -187,17 +132,19 @@ export default function Anime() {
                       <option value={"true"}>Dublado</option>
                       <option value={"false"}>Lengendado</option>
                     </select>
-                    <Loading />
+                    
                 </div>
                 <div className="productFormRight">
                     <div className="productUpload">
-                        <img src={anime.img} alt="" className="productUploadImg" />
-                        <label htmlFor="file" style={{cursor: "pointer"}}>
-                            <Publish/>
+                        
+                        <label htmlFor="file" style={{cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" , width: "100%", background: "gray", borderRadius: "5px", color: "#fff"}}>
+                          {file?.name ? file.name :`upload da imagem`}<Publish/>
                         </label>
+                        {/* <img src={anime.img} alt="" className="productUploadImg" /> */}
                         <input onChange={e=>setFile(e.target.files[0])} type="file" id="file" style={{display:"none"}} />
                     </div>
                     <button disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Atualizar Trailer</button>
+                    <Loading />
                 </div>
             </form>
       </div>

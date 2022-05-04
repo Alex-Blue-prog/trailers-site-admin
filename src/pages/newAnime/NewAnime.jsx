@@ -18,6 +18,7 @@ export default function NewAnime() {
     const [cat, setCat] = useState([]);
     const [file, setFile] = useState(null);
     const isFetching = useSelector(state => state.anime.isFetching);
+    const [invalid, setInvalid] = useState(false);
 
 
 
@@ -33,6 +34,15 @@ export default function NewAnime() {
     
   const hadleClick = (e) => {
     e.preventDefault();
+
+    if(!updateNewAnime?.name) {
+
+      setInvalid(true);
+      return;
+
+    } else {
+      setInvalid(false);
+    }
     
     if(file == null) {
         const anime = {...updateNewAnime, categories: cat};
@@ -90,24 +100,6 @@ export default function NewAnime() {
 
   }
 
-    const MONTHS = useMemo(
-        () => [
-        "Jan",
-        "Fev",
-        "Mar",
-        "Abr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Set",
-        "Out",
-        "Nov",
-        "Dez"
-        ],
-        []
-    );
-
   return (
     <div className="product">
          <div className="productTitleContainer">
@@ -116,7 +108,7 @@ export default function NewAnime() {
         <div className="productBottom">
             <form className="productForm">
                 <div className="productFormLeft">
-                    <label>Nome do Trailer</label>
+                    <label style={{color: invalid ? 'red' : ''}}>Nome do Trailer</label>
                     <input type="text" name="name" placeholder={"Naruto"} onChange={updateAnimeValue} />
                     <label>Descrição</label>
                     <input type="text" name="desc" placeholder={"Descrição"} onChange={updateAnimeValue} />
@@ -135,17 +127,18 @@ export default function NewAnime() {
                       <option value={false}>lengendado</option>
                     </select>
 
-                    <Loading />
+                    
                             
                 </div>
                 <div className="productFormRight">
                     <div className="productUpload" >
-                        <label htmlFor="file" style={{cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" ,minWidth: "300px", background: "gray", borderRadius: "5px", color: "#fff"}}>
+                        <label htmlFor="file" style={{cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" , width: "100%", background: "gray", borderRadius: "5px", color: "#fff"}}>
                           {file?.name ? file.name :`upload da imagem`}<Publish/>
                         </label>
                         <input style={{display: "none"}} onChange={e=>setFile(e.target.files[0])} type="file" id="file" />
                     </div>
                     <button disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Criar Trailer</button>
+                    <Loading />
                 </div>
             </form>
       </div>

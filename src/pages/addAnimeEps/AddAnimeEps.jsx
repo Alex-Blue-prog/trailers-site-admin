@@ -15,9 +15,9 @@ export default function AddAnimeEps() {
   const [videoFile, setVideoFile] = useState(null);
   const [epTotal, setEpTotal] = useState(0);
   const isFetching = useSelector(state => state.anime.isFetching)
+  const [invalid, setInvalid] = useState(false);
 
 
-  console.log();
 
   const updateAnimeValue = (e) => {
 
@@ -28,6 +28,15 @@ export default function AddAnimeEps() {
     
   const hadleClick = (e) => {
     e.preventDefault();
+
+    if(file == null) {
+
+      setInvalid(true);
+      return;
+
+    } else {
+      setInvalid(false);
+    }
 
     const data = new FormData();
 
@@ -76,22 +85,14 @@ export default function AddAnimeEps() {
                     <input type="number" name="ep" value={updateNewAnime.ep} placeholder={epTotal} onChange={updateAnimeValue} />
 
       
-                    <label>Upload Video</label>
+                    <label style={{color: invalid ? "red" : ""}}>Upload Video</label>
                     <input type="file" name="file" onChange={e=>setVideoFile(e.target.files[0])}/>
 
-                    <button style={{marginTop: "5px"}} disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Adicionar Trailer</button>
+                    <button style={{marginTop: "5px"}} disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Adicionar Video</button>
 
                     <Loading />      
                 </div>
-                {/* <div className="productFormRight"> */}
-                    {/* <div className="productUpload">
-                        <label htmlFor="file" style={{cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" ,minWidth: "300px", background: "gray", borderRadius: "5px", color: "#fff"}}>
-                            {file?.name ? file.name :`upload da imagem`}<Publish/>
-                        </label>
-                        <input style={{display: "none"}} onChange={e=>setFile(e.target.files[0])} type="file" id="file" />
-                    </div> */}
-                    {/* <button disabled={isFetching} className="productButton" onClick={(e)=> hadleClick(e)}>Adicionar Trailer</button> */}
-                {/* </div> */}
+
             </form>
       </div>
     </div>
