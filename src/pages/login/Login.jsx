@@ -4,8 +4,8 @@ import {login} from "../../redux/apiCall";
 import "./login.css";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("teste");
+    const [password, setPassword] = useState("teste");
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
@@ -14,11 +14,16 @@ const Login = () => {
     }
 
   return (
+    <>
+    <div className='aviso'>
+      com o usuário <b> teste </b> você poder fazer apenas POST e GET requests
+    </div>
     <div className='loginContainer'>
         <input className='loginInput' type="text" placeholder='usuário' onChange={e=>setUsername(e.target.value)} value={username} />
-        <input className='loginInput' type="text" placeholder='senha' onChange={e=>setPassword(e.target.value)} value={password} />
+        <input className='loginInput' type="password" placeholder='senha' onChange={e=>setPassword(e.target.value)} value={password} />
         <button style={{cursor: "pointer"}} onClick={handleClick}>Entrar</button>
     </div>
+    </>
   )
 }
 
