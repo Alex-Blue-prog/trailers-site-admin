@@ -16,7 +16,7 @@ const Login = () => {
   return (
     <>
     <div className='aviso'>
-      com o usuário <b> teste </b> você poder fazer apenas POST e GET requests
+      com o usuário <b> teste </b> você pode apenas fazer POST e GET requests
     </div>
     <div className='loginContainer'>
         <input className='loginInput' type="text" placeholder='usuário' onChange={e=>setUsername(e.target.value)} value={username} />
