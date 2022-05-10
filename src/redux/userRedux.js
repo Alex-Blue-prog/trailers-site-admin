@@ -21,7 +21,7 @@ const userReducer = createSlice({
         },
         logout: (state)=> {
             state.currentUser = null;
-            localStorage.clear();
+            localStorage.removeItem("persist:root");
         }
     }
 })
