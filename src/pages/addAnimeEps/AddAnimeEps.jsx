@@ -11,7 +11,7 @@ export default function AddAnimeEps() {
   const locationTakeId = useLocation().pathname.split("/")[3];
   const [updateNewAnime, setUpdateNewAnime] = useState({name: "", ep: 0, video: ""});
   const dispatch = useDispatch();
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
   const [epTotal, setEpTotal] = useState(0);
   const isFetching = useSelector(state => state.anime.isFetching)
@@ -29,7 +29,7 @@ export default function AddAnimeEps() {
   const hadleClick = (e) => {
     e.preventDefault();
 
-    if(file == null) {
+    if(videoFile == null) {
 
       setInvalid(true);
       return;
