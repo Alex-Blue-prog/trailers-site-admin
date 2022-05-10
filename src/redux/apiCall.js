@@ -100,7 +100,7 @@ export const addAnime = async (newAnime, dispatch) => {
     dispatch(getAnimeStart());
     try{
         // ->
-        await axios.post(BASE_URL + "/anime/create", newAnime, {
+        await axios.post(BASE_URL + "anime/create", newAnime, {
             headers: {
                 token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
             }
