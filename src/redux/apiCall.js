@@ -9,7 +9,8 @@ import {
     updateEpSuccess,
     showProgress
 } from "./animeRedux";
-import { publicRequest, userRequest } from "../requestMethods";
+import { BASE_URL, publicRequest, userRequest } from "../requestMethods";
+import axios from "axios";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
@@ -93,13 +94,18 @@ export const updateAnime = async (id, newAnime, dispatch, newEp) => {
     }
 }
 
-//ADD AN ANIME
+//ADD AN ANIME -- x -- ///////////////////////////////////////////////////////////////////////
 export const addAnime = async (newAnime, dispatch) => {
 
     dispatch(getAnimeStart());
     try{
-        await userRequest.post("/anime/create", newAnime);
-
+        // ->
+        await axios.post(BASE_URL + "/anime/create", newAnime, {
+            headers: {
+                token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+            }
+        });
+        // ->
         const getres = await publicRequest.get("/anime/all");
         dispatch(getAnimeSuccess(getres.data));
 
@@ -108,6 +114,7 @@ export const addAnime = async (newAnime, dispatch) => {
         console.log("could not add anime");
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 //DELETE AN EPISODE
 export const deleteAnimeEpisode = async (epId, dispatch) => {
