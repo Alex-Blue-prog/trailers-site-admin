@@ -43,7 +43,11 @@ export const deleteAnime = async (id, dispatch) => {
     try{
 
         dispatch(deleteAnimeSuccess(id)); //deleting from ui
-        await userRequest.delete("/anime/"+ id); // deleting from the server
+        await publicRequest.delete("/anime/"+ id, {
+            headers: {
+                token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+            }
+        }); // deleting from the server
         
     }catch(err) {
         dispatch(getAnimeFailure());
