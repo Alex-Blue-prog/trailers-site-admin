@@ -62,13 +62,20 @@ export const updateAnime = async (id, newAnime, dispatch, newEp) => {
     try{
         if(!newEp){
             //update anime main info
-            await userRequest.put("/anime/"+ id, newAnime);
+            await publicRequest.put("/anime/"+ id, newAnime, {
+                headers: {
+                    token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+                }
+            });
             dispatch(updateAnimeSuccess({newAnime, id}));
             return;
         }
         
         //add new episode
-        await userRequest.put("/anime/"+ id, newAnime, {
+        await publicRequest.put("/anime/"+ id, newAnime, {
+            headers: {
+                token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+            },
             onUploadProgress: progressEvent => {
                 let progress = null;
 
@@ -125,7 +132,11 @@ export const deleteAnimeEpisode = async (epId, dispatch) => {
     dispatch(getAnimeStart());
     try{
         dispatch(deleteEpSuccess(epId)); // deleting from ui
-        await userRequest.delete("/anime/ep/" + epId); // deleting from server
+        await publicRequest.delete("/anime/ep/" + epId ,{
+            headers : {
+                token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+            }
+        }); // deleting from server
     }catch(err){
         dispatch(getAnimeFailure());
         console.log("COULD NOT DELETE ANIME EPISODE");
@@ -137,7 +148,10 @@ export const updateAnimeEpisode = async (epId, episode, dispatch) => {
   
     dispatch(getAnimeStart());
     try{
-        const res = await userRequest.put("/anime/ep/" + epId, episode, {
+        const res = await publicRequest.put("/anime/ep/" + epId, episode, {
+            headers: {
+                token: "Bearer " + JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.accessToken
+            },
             onUploadProgress: progressEvent => {
                 let progress = null;
 
